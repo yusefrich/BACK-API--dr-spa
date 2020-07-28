@@ -1,0 +1,25 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "backend application for a ar 360 game",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ar360-eventos/backend.git"
+  },
+  "keywords": [
+    "api"
+  ],
+  "author": "Yusef Richard de Oliveira Alves (yusefrich)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ar360-eventos/backend/issues"
+  },
+  "homepage": "https://github.com/Ar360-eventos/backend#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
