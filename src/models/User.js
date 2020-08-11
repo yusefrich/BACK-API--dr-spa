@@ -13,6 +13,7 @@ class User extends Model {
 
     static associate(models){
         this.hasMany(models.Address, {foreignKey: 'user_id', as: 'addresses'});
+        this.belongsTo(models.Role, {foreignKey: 'role_id', as: 'role'});
     }
 
 
