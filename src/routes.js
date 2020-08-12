@@ -3,6 +3,7 @@ const UserController = require('./controllers/UserController');
 const RoleController = require('./controllers/RoleController');
 const AddressController = require('./controllers/AddressController');
 const AuthController = require('./controllers/AuthController');
+const auth = require('./middleware/auth')
 
 const routes = express.Router();
 
@@ -16,6 +17,6 @@ routes.post('/signin', UserController.signin);
 routes.post('/:role_name/signup', UserController.store);
 
 routes.get('/users/:user_id/addresses', AddressController.index);
-routes.post('/users/:user_id/addresses', AddressController.store);
+routes.post('/users/:user_id/addresses', auth, AddressController.store);
 
 module.exports = routes;
