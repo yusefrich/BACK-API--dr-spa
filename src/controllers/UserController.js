@@ -9,6 +9,15 @@ module.exports = {
 
         return res.json(users);
     },
+    async single(req, res){
+        const { user_id } = req.params;
+        const user = await User.findByPk(user_id, {include: [{ association: 'addresses'}, { association: 'role'}]});
+        if(!user) {
+            return res.status(404).json({error: 'User not found'});
+        }
+
+        return res.json(user);
+    },
     async signin(req, res){
         const { email, password } = req.body;
 
@@ -61,5 +70,44 @@ module.exports = {
 
             return res.json(user);
         })
+    },
+    async update(req, res){
+
+        const { user_id } = req.params;
+        const { name } = req.body;
+
+        //* checking if the user is trying to edit another users data
+        if(user_id != req.user.id && req.user.role.name != "admin"){
+            return res.status(401).json({error: 'Permition denied'});
+        }
+
+        const user = await User.findByPk(user_id);
+
+        if(!user) {
+            return res.status(400).json({error: 'User not found'});
+        }
+        await user.update({
+            name
+        })
+
+        return res.json(user);
+    },
+    async delete(req, res){
+
+        const { user_id } = req.params;
+
+        //* checking if the user is trying to edit another users data
+        if(user_id != req.user.id && req.user.role.name != "admin"){
+            return res.status(401).json({error: 'Permition denied'});
+        }
+
+        const user = await User.findByPk(user_id);
+
+        if(!user) {
+            return res.status(400).json({error: 'User not found'});
+        }
+        await user.destroy()
+
+        return res.status(200).json({message: 'User successfully deleted'});
     }
 }
