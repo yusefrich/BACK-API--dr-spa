@@ -16,10 +16,22 @@ module.exports = {
 
         return res.json(user);
     },
+    async single(req, res){
+
+        const { user_id } = req.params;
+        const { adress_id } = req.params;
+
+        const adress = await Address.findByPk(adress_id);
+
+        if(!adress) {
+            return res.status(400).json({error: 'User not found'});
+        }
+        return res.json(adress);
+    },
 
     async store(req, res){
         const { user_id } = req.params;
-        const { zipcode, street, number } = req.body;
+        const { state, city, zipcode, street, neigh } = req.body;
 
         //* checking if the user is trying to edit another users data
         if(user_id != req.user.id && req.user.role.name != "admin"){
@@ -33,9 +45,11 @@ module.exports = {
         }
 
         const address = await Address.create({
+            state,
+            city,
             zipcode,
             street,
-            number,
+            neigh,
             user_id
         })
 
@@ -44,7 +58,7 @@ module.exports = {
     async update(req, res){
         const { user_id } = req.params;
         const { adress_id } = req.params;
-        const { zipcode, street, number } = req.body;
+        const { state, city, zipcode, street, neigh } = req.body;
 
         //* checking if the user is trying to edit another users data
         if(user_id != req.user.id && req.user.role.name != "admin"){
@@ -59,9 +73,11 @@ module.exports = {
         }
 
         await adress.update({
+            state,
+            city,
             zipcode,
             street,
-            number,
+            neigh,
             user_id
         })
 

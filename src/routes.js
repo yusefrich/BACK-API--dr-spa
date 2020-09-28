@@ -4,8 +4,11 @@ const RoleController = require('./controllers/RoleController');
 const AddressController = require('./controllers/AddressController');
 const AuthController = require('./controllers/AuthController');
 const auth = require('./middleware/auth')
+var cors = require('cors')
+
 
 const routes = express.Router();
+routes.use(cors()) 
 
 /* routes.get('/login', AuthController.login); */
 
@@ -22,6 +25,7 @@ routes.delete('/users/:user_id',auth, UserController.delete);
 
 routes.get('/users/:user_id/addresses', AddressController.index);
 routes.post('/users/:user_id/addresses', auth, AddressController.store);
+routes.get('/users/:user_id/addresses/:adress_id', AddressController.single);
 routes.put('/users/:user_id/addresses/:adress_id', auth, AddressController.update);
 
 module.exports = routes;
