@@ -40,6 +40,16 @@ git clone repo-name
 ```
 npm install
 ```
+* set up database
+
+```
+npx sequelize-cli db:migrate
+```
+* populate database
+
+```
+npx sequelize-cli db:seed:all
+```
 * Run the application with
 
 ```
