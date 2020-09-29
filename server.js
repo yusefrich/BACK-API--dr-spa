@@ -9,7 +9,7 @@ const app = express();
 
 app.use(express.json());
 app.use(routes);
-app.use(morgan('dev'));
+/* app.use(morgan('dev')); */
 
 //cors
 app.use ((req, res, next) => {
