@@ -4,7 +4,7 @@ module.exports = {
     dialect: 'mysql',
     host: process.env.DB_HOST,
     username: process.env.DB_USERNAME,
-    password: '',
+    password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
     define: {
         timestamps: true,
